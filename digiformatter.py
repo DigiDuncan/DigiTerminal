@@ -1,7 +1,8 @@
-from colored import fore, back, style, fg, bg, attr
-from time import strftime, localtime
 import os
 import math
+from time import strftime, localtime
+
+from colored import fore, back, style, fg, bg, attr
 
 #Activate VT-100 terminal formatting.
 os.system("")
