@@ -3,6 +3,8 @@ import codecs
 
 from setuptools import setup, find_packages
 
+from digiformatter import version as versionnum
+
 here = os.path.abspath(os.path.dirname(__file__))
 
 def read(*parts):
@@ -11,7 +13,7 @@ def read(*parts):
 
 setup(
     name="digiformatter",
-    version="0.1.0",
+    version=versionnum,
     description="Make your terminals look spicy.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
