@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'MS Gothic';
+    src: url('subset-MS-Gothic.woff2') format('woff2'),
+        url('subset-MS-Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+body {
+    background-color: #181818;
+    color: #E8E8E8;
+    font-family: 'Lato';
+    width: 80%;
+    padding-left: 5%;
+
+}
+code {
+    font-family: 'MS Gothic';
+    font-weight: 200;
+    background-color: #303030;
+}
+a:link {
+  color: #008888;
+}
+a:visited {
+  color: #AA8888;
+}
+h1{
+    font-size: 72px;
+}
+#subtitle {
+    line-height: 8px;
+    font-size: 32px;
+}
+h2{
+    font-size: 28px;
+}
+#comment {
+    font-family: 'MS Gothic';
+    font-weight: 200;
+}
+footer {
+    font-family: 'MS Gothic';
+    font-weight: 200;
+    color: #888888;
+}

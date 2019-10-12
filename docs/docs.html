@@ -1,8 +1,25 @@
+<html>
+<head>
+
+<title>DigiFormatter.py 0.2.0 Docs</title>
+<meta name="author" content="DigiDuncan">
+<meta name="description" content="Documentation for the Python module DigiFormatter.">
+<meta name="keywords" content="digiformatter, digiformat, digiduncan, duncan, walsh, python, py, python3, format, color, console, terminal, CUI">
+
+<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+
+</head>
+
+<body> <!-- Automatically generatred with a Markdown to HTML converter, and then a HTML Beautifier. -->
+
 <h1 id="digiformatter">DigiFormatter</h1>
 
-<p><strong>Make your terminals look spicy.</strong></p>
+<p id="subtitle"><strong>Make your terminals look spicy.</strong></p>
 
 <p>Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and ａｅｓｔｈｅｔｉｃ video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can <code>import</code> it.</p>
+
+<hr />
 
 <h2 id="howtoinstall">How to install</h2>
 
@@ -23,109 +40,110 @@
 <h4 id="constants">Constants</h4>
 
 <ul>
-<li><a href="#blocks">BLANK, TWENTYFIVE, FIFTY, SEVENTYFIVE, FULL</a></li>
+    <li><a href="#blocks">BLANK, TWENTYFIVE, FIFTY, SEVENTYFIVE, FULL</a></li>
 
-<li><a href="#bell">BELL</a></li>
+    <li><a href="#bell">BELL</a></li>
 
-<li><a href="esc">ESC</a></li>
+    <li><a href="esc">ESC</a></li>
 
-<li><a href="#cursormove">CURSOR_UP, CURSOR_DOWN, CURSOR_RIGHT, CURSOR_LEFT</a></li>
+    <li><a href="#cursormove">CURSOR_UP, CURSOR_DOWN, CURSOR_RIGHT, CURSOR_LEFT</a></li>
 
-<li><a href="#cursorsavestates">SAVE_CURSOR, LOAD_CURSOR</a></li>
+    <li><a href="#cursorsavestates">SAVE_CURSOR, LOAD_CURSOR</a></li>
 
-<li><a href="#insanddel">INSERT_BLANK, DELETE_CHAR, INSERT_LINE, DELETE_LINE</a></li>
+    <li><a href="#insanddel">INSERT_BLANK, DELETE_CHAR, INSERT_LINE, DELETE_LINE</a></li>
 
-<li><a href="#endandstart">END_OF_LINE, BEGIN_OF_LINE</a></li>
+    <li><a href="#endandstart">END_OF_LINE, BEGIN_OF_LINE</a></li>
 </ul>
 
 <h4 id="functions">Functions</h4>
 
 <ul>
-<li>Setter Functions
+    <li>Setter Functions
 
+        <ul>
+            <li><a href="#timecolor">timecolor()</a></li>
 
-<ul>
-<li><a href="#timecolor">timecolor()</a></li>
+            <li><a href="#msgcolor">msgcolor()</a></li>
 
-<li><a href="#msgcolor">msgcolor()</a></li>
+            <li><a href="#testcolor">testcolor()</a></li>
 
-<li><a href="#testcolor">testcolor()</a></li>
+            <li><a href="#linelength">linelength()</a></li>
 
-<li><a href="#linelength">linelength()</a></li>
+            <li><a href="#timestring">timestring()</a></li>
+        </ul>
+    </li>
 
-<li><a href="#timestring">timestring()</a></li></ul>
-</li>
+    <li>Message Printing Functions
 
-<li>Message Printing Functions
+        <ul>
+            <li><a href="#time">time()</a></li>
 
+            <li><a href="#msg">msg()</a></li>
 
-<ul>
-<li><a href="#time">time()</a></li>
+            <li><a href="#load">load()</a></li>
 
-<li><a href="#msg">msg()</a></li>
+            <li><a href="#warn">warn()</a></li>
 
-<li><a href="#load">load()</a></li>
+            <li><a href="#crit">crit()</a></li>
 
-<li><a href="#warn">warn()</a></li>
+            <li><a href="#test">test()</a></li>
+        </ul>
+    </li>
 
-<li><a href="#crit">crit()</a></li>
+    <li>Custom Color Preset Functions
 
-<li><a href="#test">test()</a></li></ul>
-</li>
+        <ul>
+            <li><a href="#createCustom">createCustom()</a></li>
 
-<li>Custom Color Preset Functions
+            <li><a href="#custom">custom()</a></li>
+        </ul>
+    </li>
 
+    <li>Misc Functions
 
-<ul>
-<li><a href="#createCustom">createCustom()</a></li>
+        <ul>
+            <li><a href="#createLoadBar">createLoadBar()</a></li>
 
-<li><a href="#custom">custom()</a></li></ul>
-</li>
-
-<li>Misc Functions
-
-
-<ul>
-<li><a href="#createLoadBar">createLoadBar()</a></li>
-
-<li><a href="#truncate">truncate()</a></li></ul>
-</li>
+            <li><a href="#truncate">truncate()</a></li>
+        </ul>
+    </li>
 </ul>
+
+<hr />
 
 <h2 id="constants-1">Constants</h2>
 
 <h3 id="aidblocksadigiformatterblanktwentyfivefiftyseventyfivefull"><a id ="blocks"></a><code>digiformatter</code>.<strong>BLANK</strong>, .<strong>TWENTYFIVE</strong>, .<strong>FIFTY</strong>, .<strong>SEVENTYFIVE</strong>, .<strong>FULL</strong></h3>
 
-<p>Aliases for Extended ASCII "block characters". In order, 32 (" "), 176 ("░"), 177 ("▒"), 178 ("▓"), and 219 ("█").</p>
+<p>Aliases for Extended ASCII "block characters". In order, 32 ("&#32;"), 176 ("░"), 177 ("▒"), 178 ("▓"), and 219 ("█").</p>
 
-<p><em>//Yes, I know ASCII code 32 is just a space.</em></p>
+<p id="comment"><i>//Yes, I know ASCII code 32 is just a space.</i></p>
 
 <h3 id="aidbelladigiformatterbell"><a id ="bell"></a><code>digiformatter</code>.<strong>BELL</strong></h3>
 
-<p>Aliases for the ASCII character 07, which when printed, is invisible, and plays a "bell" or "alert" sound.</p>
+<p>Aliases for the ASCII character <code>07</code>, which when printed, is invisible, and plays a "bell" or "alert" sound.</p>
 
 <h3 id="aidescadigiformatteresc"><a id ="esc"></a><code>digiformatter</code>.<strong>ESC</strong></h3>
 
-<p>Not really designed to be used in a program. Equates to the character octal 033<sub>8</sub> (""). This is the <a href="http://www.termsys.demon.co.uk/vtansi.htm">VT-100 formatting</a> escape character.</p>
+<p>Not really designed to be used in a program. Equates to the character octal <code>033<sub>8</sub></code> ("&#27;"). This is the <a href="http://www.termsys.demon.co.uk/vtansi.htm">VT-100 formatting</a> escape character.</p>
+
+<p id="comment"><i>//The character "&#27;" is invisible and will not be able to be displayed, or will show up as a replacement character (a box or a "�").</i></p>
 
 <h3 id="aidcursormoveadigiformattercursor_upcursor_downcursor_rightcursor_left"><a id ="cursormove"></a><code>digiformatter</code>.<strong>CURSOR_UP</strong>, .<strong>CURSOR_DOWN</strong>, .<strong>CURSOR_RIGHT</strong>, .<strong>CURSOR_LEFT</strong></h3>
 
-<p>Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text.
-Equates to <code>digiformatter.ESC</code> + <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> respectively.</p>
+<p>Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text. Equates to <code>digiformatter.ESC</code> + <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> respectively.</p>
 
 <h3 id="aidcursorsavestatesadigiformattersave_cursorload_cursor"><a id ="cursorsavestates"></a><code>digiformatter</code>.<strong>SAVE_CURSOR</strong>, .<strong>LOAD_CURSOR</strong></h3>
 
-<p>Prints VT-100 codes that save and load the cursor position.
-Equates to <code>digiformatter.ESC</code> + <code>7</code> and <code>8</code> respectively.</p>
+<p>Prints VT-100 codes that save and load the cursor position. Equates to <code>digiformatter.ESC</code> + <code>7</code> and <code>8</code> respectively.</p>
 
 <h3 id="aidinsanddeladigiformatterinsert_blankdelete_charinsert_linedelete_line"><a id ="insanddel"></a><code>digiformatter</code>.<strong>INSERT_BLANK</strong>, .<strong>DELETE_CHAR</strong>, .<strong>INSERT_LINE</strong>, .<strong>DELETE_LINE</strong></h3>
 
-<p>Prints VT-100 codes that insert and delete characters and lines, as per their names.
-Equates to <code>digiformatter.ESC</code> + <code>[1@</code>, <code>[1X</code>, <code>[1L</code>, and <code>[1M</code> respectively.</p>
+<p>Prints VT-100 codes that insert and delete characters and lines, as per their names. Equates to <code>digiformatter.ESC</code> + <code>[1@</code>, <code>[1X</code>, <code>[1L</code>, and <code>[1M</code> respectively.</p>
 
 <h3 id="aidendandstartadigiformatterend_of_linebegin_of_line"><a id ="endandstart"></a><code>digiformatter</code>.<strong>END_OF_LINE</strong>, .<strong>BEGIN_OF_LINE</strong></h3>
 
-<p>Prints <code>digiformatter.CURSOR_RIGHT</code> or <code>digiformatter.CURSOR_LEFT</code> <code>digiformatter.linelength</code> times. See []<code>digiformatter.linelength()</code>](#linelength).</p>
+<p>Prints <code>digiformatter.CURSOR_RIGHT</code> or <code>digiformatter.CURSOR_LEFT</code> <code>digiformatter.linelength</code> times. See <a href="#linelength"><code>digiformatter.linelength()</code></a>.</p>
 
 <h2 id="setterfunctions">Setter Functions</h2>
 
@@ -147,8 +165,7 @@ Equates to <code>digiformatter.ESC</code> + <code>[1@</code>, <code>[1X</code>, 
 
 <h3 id="aidtimestringadigiformattertimestringstrnew"><a id ="timestring"></a><code>digiformatter</code>.<strong>timestring(</strong> <em>str</em> new <strong>)</strong></h3>
 
-<p>Sets the variable <code>digiformatter.linelength</code> defaults to <code>"%d %b %H:%M:%S"</code>.
-See <a href="#time"><code>digiformatter.time()</code></a></p>
+<p>Sets the variable <code>digiformatter.linelength</code> defaults to <code>"%d %b %H:%M:%S"</code>. See <a href="#time"><code>digiformatter.time()</code></a></p>
 
 <h2 id="messageprintingfunctions">Message Printing Functions</h2>
 
@@ -187,9 +204,9 @@ See <a href="#time"><code>digiformatter.time()</code></a></p>
 <p>Creates a custom message color preset.</p>
 
 <ul>
-<li>fore, back: Can be set to any valid <code>colored</code> color. See <a href="https://pypi.org/project/colored/"><code>colored.colors</code></a>. Defaults to 256, or <code>colored.colors.DEFAULT</code>.</li>
+    <li>fore, back: Can be set to any valid <code>colored</code> color. See <a href="https://pypi.org/project/colored/"><code>colored.colors</code></a>. Defaults to 256, or <code>colored.colors.DEFAULT</code>.</li>
 
-<li>attr: Can be set to any valid <code>colored</code> attribute. See <a href="https://pypi.org/project/colored/"><code>colored.style</code></a>. Defaults to None.</li>
+    <li>attr: Can be set to any valid <code>colored</code> attribute. See <a href="https://pypi.org/project/colored/"><code>colored.style</code></a>. Defaults to None.</li>
 </ul>
 
 <p>See <a href="#custom"><code>digiformatter.custom()</code></a>.</p>
@@ -207,3 +224,7 @@ See <a href="#time"><code>digiformatter.time()</code></a></p>
 <h3 id="aidtruncateadigiformattertruncatestriteminttrunclenu80u"><a id ="truncate"></a><code>digiformatter</code>.<strong>truncate(</strong> <em>str</em> item, <em>int</em> trunclen = <u>80</u> <strong>)</strong></h3>
 
 <p>Returns <code>item</code> is its length is less than or equal to <code>trunclen</code>, else returns the first <code>trunclen - 1</code> characters of <code>item</code>, suffixed by "…" (the ellipses character.)</p>
+
+<hr />
+
+<footer> &copy;2019 DigiDuncan. Free for public use. </footer>

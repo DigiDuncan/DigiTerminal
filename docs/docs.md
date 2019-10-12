@@ -1,7 +1,9 @@
 # DigiFormatter
-**Make your terminals look spicy.**
+<p id="subtitle"><strong>Make your terminals look spicy.</strong></p>
 
 Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and ａｅｓｔｈｅｔｉｃ video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can `import` it.
+
+_________________________
 
 ## How to install
 **Windows:** Open a Command Prompt as Admin and run `pip install git+https://github.com/DigiDuncan/DigiFormatter`.
@@ -28,37 +30,41 @@ _________________________
 
 #### Functions
 - Setter Functions
-    * [timecolor\(\)](#timecolor)
-    * [msgcolor\(\)](#msgcolor)
-    * [testcolor\(\)](#testcolor)
-    * [linelength\(\)](#linelength)
-    * [timestring\(\)](#timestring)
+    * [timecolor()](#timecolor)
+    * [msgcolor()](#msgcolor)
+    * [testcolor()](#testcolor)
+    * [linelength()](#linelength)
+    * [timestring()](#timestring)
 - Message Printing Functions
-    * [time\(\)](#time)
-    * [msg\(\)](#msg)
-    * [load\(\)](#load)
-    * [warn\(\)](#warn)
-    * [crit\(\)](#crit)
-    * [test\(\)](#test)
+    * [time()](#time)
+    * [msg()](#msg)
+    * [load()](#load)
+    * [warn()](#warn)
+    * [crit()](#crit)
+    * [test()](#test)
 - Custom Color Preset Functions
-    * [createCustom\(\)](#createCustom)
-    * [custom\(\)](#custom)
+    * [createCustom()](#createCustom)
+    * [custom()](#custom)
 - Misc Functions
-    * [createLoadBar\(\)](#createLoadBar)
-    * [truncate\(\)](#truncate)
+    * [createLoadBar()](#createLoadBar)
+    * [truncate()](#truncate)
+
+_________________________
 
 ## Constants
 
 ### <a id ="blocks"></a>`digiformatter`.**BLANK**, .**TWENTYFIVE**, .**FIFTY**, .**SEVENTYFIVE**, .**FULL**
-Aliases for Extended ASCII "block characters". In order, 32 (" "), 176 ("░"), 177 ("▒"), 178 ("▓"), and 219 ("█").
+Aliases for Extended ASCII "block characters". In order, 32 ("&#32;"), 176 ("░"), 177 ("▒"), 178 ("▓"), and 219 ("█").
 
-*//Yes, I know ASCII code 32 is just a space.*
+<p id="comment"><i>//Yes, I know ASCII code 32 is just a space.</i></p>
 
 ### <a id ="bell"></a>`digiformatter`.**BELL**
-Aliases for the ASCII character 07, which when printed, is invisible, and plays a "bell" or "alert" sound.
+Aliases for the ASCII character `07`, which when printed, is invisible, and plays a "bell" or "alert" sound.
 
 ### <a id ="esc"></a>`digiformatter`.**ESC**
-Not really designed to be used in a program. Equates to the character octal 033<sub>8</sub> (""). This is the [VT-100 formatting](http://www.termsys.demon.co.uk/vtansi.htm) escape character.
+Not really designed to be used in a program. Equates to the character octal <code>033<sub>8</sub></code> ("&#27;"). This is the [VT-100 formatting](http://www.termsys.demon.co.uk/vtansi.htm) escape character.
+
+<p id="comment"><i>//The character "&#27;" is invisible and will not be able to be displayed, or will show up as a replacement character (a box or a "�").</i></p>
 
 ### <a id ="cursormove"></a>`digiformatter`.**CURSOR\_UP**, .**CURSOR\_DOWN**, .**CURSOR\_RIGHT**, .**CURSOR\_LEFT**
 Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text.
@@ -73,7 +79,7 @@ Prints VT-100 codes that insert and delete characters and lines, as per their na
 Equates to `digiformatter.ESC` + `[1@`, `[1X`, `[1L`, and `[1M` respectively.
 
 ### <a id ="endandstart"></a>`digiformatter`.**END\_OF\_LINE**, .**BEGIN\_OF\_LINE**
-Prints `digiformatter.CURSOR_RIGHT` or `digiformatter.CURSOR_LEFT` `digiformatter.linelength` times. See []`digiformatter.linelength()`](#linelength).
+Prints `digiformatter.CURSOR_RIGHT` or `digiformatter.CURSOR_LEFT` `digiformatter.linelength` times. See [`digiformatter.linelength()`](#linelength).
 
 ## Setter Functions
 
@@ -136,3 +142,7 @@ Creates a bar representing the percentage `current`/`total` * 100, in which the 
 
 ### <a id ="truncate"></a>`digiformatter`.**truncate(** *str* item, *int* trunclen = <u>80</u> **)**
 Returns `item` is its length is less than or equal to `trunclen`, else returns the first `trunclen - 1` characters of `item`, suffixed by "…" (the ellipses character.)
+
+_________________________
+
+<footer> &copy;2019 DigiDuncan. Free for public use. </footer>
