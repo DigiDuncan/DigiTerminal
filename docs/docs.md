@@ -31,19 +31,19 @@ Aliases for the ASCII character 07, which when printed, is invisible, and plays 
 ### `digiformatter`.**ESC**
 Not really designed to be used in a program. Equates to the character octal 033<sub>8</sub> (""). This is the [VT-100 formatting](http://www.termsys.demon.co.uk/vtansi.htm) escape character.
 
-### `digiformatter`.**CURSOR_UP**, .**CURSOR_DOWN**, .**CURSOR_RIGHT**, .**CURSOR_LEFT**
+### `digiformatter`.**CURSOR\_UP**, .**CURSOR\_DOWN**, .**CURSOR\_RIGHT**, .**CURSOR\_LEFT**
 Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text.
 Equates to `digiformatter.ESC` + `A`, `B`, `C`, and `D` respectively.
 
-### `digiformatter`.**SAVE_CURSOR**, .**LOAD_CURSOR**
+### `digiformatter`.**SAVE\_CURSOR**, .**LOAD\_CURSOR**
 Prints VT-100 codes that save and load the cursor position.
 Equates to `digiformatter.ESC` + `7` and `8` respectively.
 
-### `digiformatter`.**INSERT_BLANK**, .**DELETE_CHAR**, .**INSERT_LINE**, .**DELETE_LINE**
+### `digiformatter`.**INSERT\_BLANK**, .**DELETE\_CHAR**, .**INSERT\_LINE**, .**DELETE\_LINE**
 Prints VT-100 codes that insert and delete characters and lines, as per their names.
 Equates to `digiformatter.ESC` + `[1@`, `[1X`, `[1L`, and `[1M` respectively.
 
-### `digiformatter`.**END_OF_LINE**, .**BEGIN_OF_LINE**
+### `digiformatter`.**END\_OF\_LINE**, .**BEGIN\_OF\_LINE**
 Prints `digiformatter.CURSOR_RIGHT` or `digiformatter.CURSOR_LEFT` `digiformatter.linelength` times. See `digiformatter.linelength()`.
 
 ## Setter Functions
