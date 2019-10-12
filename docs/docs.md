@@ -1,7 +1,7 @@
 # DigiFormatter
 <p id="subtitle"><strong>Make your terminals look spicy.</strong></p>
 
-Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and ａｅｓｔｈｅｔｉｃ video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can `import` it.
+Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and &#xFF41;&#xFF45;&#xFF53;&#xFF54;&#xFF48;&#xFF45;&#xFF54;&#xFF49;&#xFF43; video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can `import` it.
 
 _________________________
 
@@ -10,7 +10,7 @@ _________________________
 
 **Linux:** Probably the same thing as Windows?
 
-**Mac:** ¯\\\_(ツ)\_/¯
+**Mac:** &#xAF;&#x5C;&#x5F;&#x28;&#x30C4;&#x29;&#x5F;&#x2F;&#xAF;
 
 Requires Python 3+ and the `colored` module (which should install itself.)
 
