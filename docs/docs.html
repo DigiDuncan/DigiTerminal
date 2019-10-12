@@ -1,0 +1,209 @@
+<h1 id="digiformatter">DigiFormatter</h1>
+
+<p><strong>Make your terminals look spicy.</strong></p>
+
+<p>Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and ａｅｓｔｈｅｔｉｃ video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can <code>import</code> it.</p>
+
+<h2 id="howtoinstall">How to install</h2>
+
+<p><strong>Windows:</strong> Open a Command Prompt as Admin and run <code>pip install git+https://github.com/DigiDuncan/DigiFormatter</code>.</p>
+
+<p><strong>Linux:</strong> Probably the same thing as Windows?</p>
+
+<p><strong>Mac:</strong> ¯\_(ツ)_/¯</p>
+
+<p>Requires Python 3+ and the <code>colored</code> module (which should install itself.)</p>
+
+<h2 id="howtoimport">How to import</h2>
+
+<p>If you've installed it right, you should just be able to use <code>import digiformatter</code>. I prefer to use <code>import digiformatter as &lt;name&gt;</code> since <code>digiformatter</code> is kinda long.</p>
+
+<hr />
+
+<h4 id="constants">Constants</h4>
+
+<ul>
+<li><a href="#blocks">BLANK, TWENTYFIVE, FIFTY, SEVENTYFIVE, FULL</a></li>
+
+<li><a href="#bell">BELL</a></li>
+
+<li><a href="esc">ESC</a></li>
+
+<li><a href="#cursormove">CURSOR_UP, CURSOR_DOWN, CURSOR_RIGHT, CURSOR_LEFT</a></li>
+
+<li><a href="#cursorsavestates">SAVE_CURSOR, LOAD_CURSOR</a></li>
+
+<li><a href="#insanddel">INSERT_BLANK, DELETE_CHAR, INSERT_LINE, DELETE_LINE</a></li>
+
+<li><a href="#endandstart">END_OF_LINE, BEGIN_OF_LINE</a></li>
+</ul>
+
+<h4 id="functions">Functions</h4>
+
+<ul>
+<li>Setter Functions
+
+
+<ul>
+<li><a href="#timecolor">timecolor()</a></li>
+
+<li><a href="#msgcolor">msgcolor()</a></li>
+
+<li><a href="#testcolor">testcolor()</a></li>
+
+<li><a href="#linelength">linelength()</a></li>
+
+<li><a href="#timestring">timestring()</a></li></ul>
+</li>
+
+<li>Message Printing Functions
+
+
+<ul>
+<li><a href="#time">time()</a></li>
+
+<li><a href="#msg">msg()</a></li>
+
+<li><a href="#load">load()</a></li>
+
+<li><a href="#warn">warn()</a></li>
+
+<li><a href="#crit">crit()</a></li>
+
+<li><a href="#test">test()</a></li></ul>
+</li>
+
+<li>Custom Color Preset Functions
+
+
+<ul>
+<li><a href="#createCustom">createCustom()</a></li>
+
+<li><a href="#custom">custom()</a></li></ul>
+</li>
+
+<li>Misc Functions
+
+
+<ul>
+<li><a href="#createLoadBar">createLoadBar()</a></li>
+
+<li><a href="#truncate">truncate()</a></li></ul>
+</li>
+</ul>
+
+<h2 id="constants-1">Constants</h2>
+
+<h3 id="aidblocksadigiformatterblanktwentyfivefiftyseventyfivefull"><a id ="blocks"></a><code>digiformatter</code>.<strong>BLANK</strong>, .<strong>TWENTYFIVE</strong>, .<strong>FIFTY</strong>, .<strong>SEVENTYFIVE</strong>, .<strong>FULL</strong></h3>
+
+<p>Aliases for Extended ASCII "block characters". In order, 32 (" "), 176 ("░"), 177 ("▒"), 178 ("▓"), and 219 ("█").</p>
+
+<p><em>//Yes, I know ASCII code 32 is just a space.</em></p>
+
+<h3 id="aidbelladigiformatterbell"><a id ="bell"></a><code>digiformatter</code>.<strong>BELL</strong></h3>
+
+<p>Aliases for the ASCII character 07, which when printed, is invisible, and plays a "bell" or "alert" sound.</p>
+
+<h3 id="aidescadigiformatteresc"><a id ="esc"></a><code>digiformatter</code>.<strong>ESC</strong></h3>
+
+<p>Not really designed to be used in a program. Equates to the character octal 033<sub>8</sub> (""). This is the <a href="http://www.termsys.demon.co.uk/vtansi.htm">VT-100 formatting</a> escape character.</p>
+
+<h3 id="aidcursormoveadigiformattercursor_upcursor_downcursor_rightcursor_left"><a id ="cursormove"></a><code>digiformatter</code>.<strong>CURSOR_UP</strong>, .<strong>CURSOR_DOWN</strong>, .<strong>CURSOR_RIGHT</strong>, .<strong>CURSOR_LEFT</strong></h3>
+
+<p>Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text.
+Equates to <code>digiformatter.ESC</code> + <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> respectively.</p>
+
+<h3 id="aidcursorsavestatesadigiformattersave_cursorload_cursor"><a id ="cursorsavestates"></a><code>digiformatter</code>.<strong>SAVE_CURSOR</strong>, .<strong>LOAD_CURSOR</strong></h3>
+
+<p>Prints VT-100 codes that save and load the cursor position.
+Equates to <code>digiformatter.ESC</code> + <code>7</code> and <code>8</code> respectively.</p>
+
+<h3 id="aidinsanddeladigiformatterinsert_blankdelete_charinsert_linedelete_line"><a id ="insanddel"></a><code>digiformatter</code>.<strong>INSERT_BLANK</strong>, .<strong>DELETE_CHAR</strong>, .<strong>INSERT_LINE</strong>, .<strong>DELETE_LINE</strong></h3>
+
+<p>Prints VT-100 codes that insert and delete characters and lines, as per their names.
+Equates to <code>digiformatter.ESC</code> + <code>[1@</code>, <code>[1X</code>, <code>[1L</code>, and <code>[1M</code> respectively.</p>
+
+<h3 id="aidendandstartadigiformatterend_of_linebegin_of_line"><a id ="endandstart"></a><code>digiformatter</code>.<strong>END_OF_LINE</strong>, .<strong>BEGIN_OF_LINE</strong></h3>
+
+<p>Prints <code>digiformatter.CURSOR_RIGHT</code> or <code>digiformatter.CURSOR_LEFT</code> <code>digiformatter.linelength</code> times. See []<code>digiformatter.linelength()</code>](#linelength).</p>
+
+<h2 id="setterfunctions">Setter Functions</h2>
+
+<h3 id="aidtimecoloradigiformattertimecolorintnew"><a id ="timecolor"></a><code>digiformatter</code>.<strong>timecolor(</strong> <em>int</em> new <strong>)</strong></h3>
+
+<p>Sets the variable <code>digiformatter.timecolor</code> defaults to <code>5</code>, or <code>colored.PURPLE</code>. See <a href="#time"><code>digiformatter.time()</code></a>.</p>
+
+<h3 id="aidmsgcoloradigiformattermsgcolorintnew"><a id ="msgcolor"></a><code>digiformatter</code>.<strong>msgcolor(</strong> <em>int</em> new <strong>)</strong></h3>
+
+<p>Sets the variable <code>digiformatter.msgcolor</code> defaults to <code>51</code>, or <code>colored.CYAN_1</code>. See <code>digiformatter.msg()</code></p>
+
+<h3 id="aidtestcoloradigiformattertestcolorintnew"><a id ="testcolor"></a><code>digiformatter</code>.<strong>testcolor(</strong> <em>int</em> new <strong>)</strong></h3>
+
+<p>Sets the variable <code>digiformatter.testcolor</code> defaults to <code>4</code>, or <code>colored.BLUE</code>. See <a href="#test"><code>digiformatter.test()</code></a>.</p>
+
+<h3 id="aidlinelengthadigiformatterlinelengthintnew"><a id ="linelength"></a><code>digiformatter</code>.<strong>linelength(</strong> <em>int</em> new <strong>)</strong></h3>
+
+<p>Sets the variable <code>digiformatter.linelength</code> defaults to <code>100</code>.</p>
+
+<h3 id="aidtimestringadigiformattertimestringstrnew"><a id ="timestring"></a><code>digiformatter</code>.<strong>timestring(</strong> <em>str</em> new <strong>)</strong></h3>
+
+<p>Sets the variable <code>digiformatter.linelength</code> defaults to <code>"%d %b %H:%M:%S"</code>.
+See <a href="#time"><code>digiformatter.time()</code></a></p>
+
+<h2 id="messageprintingfunctions">Message Printing Functions</h2>
+
+<h3 id="aidtimeadigiformattertime"><a id ="time"></a><code>digiformatter</code>.<strong>time()</strong></h3>
+
+<p>Returns a string in the color <code>digiformatter.timecolor</code> and in the format <code>strftime(f"{digiformatter.timestring} | ", localtime())</code>. See <a href="https://docs.python.org/3/library/time.html#time.strftime"><code>time.strftime()</code></a> and <a href="https://docs.python.org/3/library/time.html#time.localtime"><code>time.localtime()</code></a>.</p>
+
+<h3 id="aidmsgadigiformattermsgstrmessageboolshowtimeutrueu"><a id ="msg"></a><code>digiformatter</code>.<strong>msg(</strong> <em>str</em> message, <em>bool</em> showtime = <u>True</u>)</h3>
+
+<p>Prints a message in color <code>digiformatter.msgcolor</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h3 id="aidloadadigiformatterloadstrmessageboolshowtimeufalseu"><a id ="load"></a><code>digiformatter</code>.<strong>load(</strong> <em>str</em> message, <em>bool</em> showtime = <u>False</u>)</h3>
+
+<p>Prints a message in color <code>colored.colors.GREY_27</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h3 id="aidwarnadigiformatterwarnstrmessageboolshowtimeutrueu"><a id ="warn"></a><code>digiformatter</code>.<strong>warn(</strong> <em>str</em> message, <em>bool</em> showtime = <u>True</u>)</h3>
+
+<p>Prints a message in color <code>colored.colors.YELLOW</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h3 id="aidcritadigiformattercritstrmessageboolshowtimeutrueu"><a id ="crit"></a><code>digiformatter</code>.<strong>crit(</strong> <em>str</em> message, <em>bool</em> showtime = <u>True</u>)</h3>
+
+<p>Prints a message in color <code>colored.colors.WHITE</code>, with background <code>colored.colors.RED</code>, with style <code>colored.style.BOLD</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h3 id="aidtestadigiformatterteststrmessageboolshowtimeutrueu"><a id ="test"></a><code>digiformatter</code>.<strong>test(</strong> <em>str</em> message, <em>bool</em> showtime = <u>True</u>)</h3>
+
+<p>Prints a message in color <code>digiformatter.testcolor</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h3 id="aidoverwritelinesadigiformatteroverwritelinesintlines"><a id ="overwriteLines"></a><code>digiformatter</code>.<strong>overwriteLines(</strong> <em>int</em> lines <strong>)</strong></h3>
+
+<p>Overwrites (clears) <em>lines</em> lines counting up from and including the line occupied by the cursor currently.</p>
+
+<h2 id="customcolorpresetfunctions">Custom Color Preset Functions</h2>
+
+<h3 id="aidcreatecustomadigiformattercreatecustomstrnameintstrforeu256uintstrbacku256uintstrattrunoneu"><a id ="createCustom"></a><code>digiformatter</code>.<strong>createCustom(</strong> <em>str</em> name, <em>int/str</em> fore = <u>256</u>, <em>int/str</em> back = <u>256</u>, <em>int/str</em> attr = <u>None</u> <strong>)</strong></h3>
+
+<p>Creates a custom message color preset.</p>
+
+<ul>
+<li>fore, back: Can be set to any valid <code>colored</code> color. See <a href="https://pypi.org/project/colored/"><code>colored.colors</code></a>. Defaults to 256, or <code>colored.colors.DEFAULT</code>.</li>
+
+<li>attr: Can be set to any valid <code>colored</code> attribute. See <a href="https://pypi.org/project/colored/"><code>colored.style</code></a>. Defaults to None.</li>
+</ul>
+
+<p>See <a href="#custom"><code>digiformatter.custom()</code></a>.</p>
+
+<h3 id="aidcustomadigiformattercustomstrnamestrmessageboolshowtimeutrueu"><a id ="custom"></a><code>digiformatter</code>.<strong>custom(</strong> <em>str</em> name, <em>str</em> message, <em>bool</em> showtime = <u>True</u> <strong>)</strong></h3>
+
+<p>Prints a message in colors defined by previously defined preset <code>name</code>, prefixed with <code>digiformatter.time()</code> if <code>showtime</code> = True.</p>
+
+<h2 id="miscfunctions">Misc Functions</h2>
+
+<h3 id="aidcreateloadbaradigiformattercreateloadbarintcurrentinttotalintbarlengthboolshowpercentufalseu"><a id ="createLoadBar"></a><code>digiformatter</code>.<strong>createLoadBar(</strong> <em>int</em> current, <em>int</em> total, <em>int</em> barlength, <em>bool</em> showpercent = <u>False</u></h3>
+
+<p>Creates a bar representing the percentage <code>current</code>/<code>total</code> * 100, in which the bar is length <code>barlength</code> when percentage is 100, suffixed by the percentage rounded to the nearest two decimal places if <code>showpercent</code> = True.</p>
+
+<h3 id="aidtruncateadigiformattertruncatestriteminttrunclenu80u"><a id ="truncate"></a><code>digiformatter</code>.<strong>truncate(</strong> <em>str</em> item, <em>int</em> trunclen = <u>80</u> <strong>)</strong></h3>
+
+<p>Returns <code>item</code> is its length is less than or equal to <code>trunclen</code>, else returns the first <code>trunclen - 1</code> characters of <code>item</code>, suffixed by "…" (the ellipses character.)</p>
