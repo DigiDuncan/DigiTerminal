@@ -3,6 +3,8 @@
 
 Oh, terminals. Lost to time, replaced by the ever-prevalent GUI. Why, in this age of nostalgia, do we restrict its growing reach to only synthwave music, 16-bit video games, and <span class="macplus"> a e s t h e t i c </span> video filters? Terminals are going to come back, I can feel it. And why not add a little pizzazz while we're at it? Unlike what hacker movies from the 2000's would like you to believe, terminals weren't all black and green. Special characters, colors, and overwriting made terminals a powerful and beautiful user interaction tool. And much like everything else in Python, now you can `import` it.
 
+Current version `0.3.1`.
+
 _________________________
 
 ## How to install
@@ -24,11 +26,29 @@ _________________________
 * [BELL](#bell)
 * [ESC](esc)
 * [CURSOR\_UP, CURSOR\_DOWN, CURSOR\_RIGHT, CURSOR\_LEFT](#cursormove)
+* [CURSOR\_HOME](#cursorhome)
 * [SAVE\_CURSOR, LOAD\_CURSOR](#cursorsavestates)
+* [START\_CURSOR\_BLINKING, STOP\_CURSOR\_BLINKING](#cursorblink)
+* [SHOW\_CURSOR, HIDE\_CURSOR](#cursorshowhide)
+* [SCROLL\_UP, SCROLL\_DOWN](#viewportscrolls)
 * [INSERT\_BLANK, DELETE\_CHAR, INSERT\_LINE, DELETE\_LINE](#insanddel)
+* [CLEAR\_LINE\_FROM\_CURSOR\_RIGHT, CLEAR\_LINE\_FROM\_CURSOR\_LEFT](#cursorclearline)
+* [CLEAR\_SCREEN\_FROM\_CURSOR\_DOWN, CLEAR\_SCREEN\_FROM\_CURSOR\_UP](#cursorclearscreen)
+* [CLEAR\_SCREEN](#clearscreen)
 * [END\_OF\_LINE, BEGIN\_OF\_LINE](#endandstart)
+* [RESET_TERMINAL](#resetterminal)
 
 #### Functions
+- Cursor Movement Functions
+    * [cursorUp()](#cursorup)
+    * [cursorDown()](#cursordown)
+    * [cursorRight()](#cursorright)
+    * [cursorLeft()](#cursorleft)
+- Scrolling Functions
+    * [scrollUp()](#scrollup)
+    * [scrollDown()](#scrolldown)
+- Window Functions
+    * [setWindowTitle()](#setwindowtitle)
 - Setter Functions
     * [timecolor()](#timecolor)
     * [msgcolor()](#msgcolor)
@@ -60,6 +80,7 @@ Aliases for Extended ASCII "block characters". In order, 32 ("&#32;"), 176 ("░
 
 ### <a id ="bell"></a>`digiformatter`.**BELL**
 Aliases for the ASCII character `07`, which when printed, is invisible, and plays a "bell" or "alert" sound.
+<p class="alias">Aliases: <code>BEL</code></p>
 
 ### <a id ="esc"></a>`digiformatter`.**ESC**
 Not really designed to be used in a program. Equates to the character octal <code>033<sub>8</sub></code> ("&#27;"). This is the [VT-100 formatting](http://www.termsys.demon.co.uk/vtansi.htm) escape character.
@@ -69,17 +90,79 @@ Not really designed to be used in a program. Equates to the character octal <cod
 ### <a id ="cursormove"></a>`digiformatter`.**CURSOR\_UP**, .**CURSOR\_DOWN**, .**CURSOR\_RIGHT**, .**CURSOR\_LEFT**
 Prints VT-100 codes that move the cursor in the direction indicated. By default, for reference, the cursor is placed at the end of the last printed text.
 Equates to `digiformatter.ESC` + `A`, `B`, `C`, and `D` respectively.
+<p class="alias">Aliases: <code>C_UP</code>, <code>C_DOWN</code>, <code>C_RIGHT</code>, <code>C_LEFT</code></p>
+
+### <a id ="cursorhome"></a>`digiformatter`.**CURSOR\_HOME**
+Prints VT-100 code that move the cursor to the top-left corner of the screen.
+Equates to `digiformatter.ESC` + `H`
+<p class="alias">Aliases: <code>C_HOME</code></p>
 
 ### <a id ="cursorsavestates"></a>`digiformatter`.**SAVE\_CURSOR**, .**LOAD\_CURSOR**
 Prints VT-100 codes that save and load the cursor position.
 Equates to `digiformatter.ESC` + `7` and `8` respectively.
+<p class="alias">Aliases: <code>C_SAVE</code>, <code>C_LOAD</code></p>
 
-### <a id ="insanddel"></a>`digiformatter`.**INSERT\_BLANK**, .**DELETE\_CHAR**, .**INSERT\_LINE**, .**DELETE\_LINE**
+### <a id ="cursorblink"></a>`digiformatter`.**START\_CURSOR\_BLINKING**, .**STOP\_CURSOR\_BLINKING**
+Prints VT-100 codes that start and stop the cursor blinking, respectively.
+Equates to `digiformatter.ESC` + `[?12h` and `[?12l` respectively.
+<p class="alias">Aliases: <code>C_BLINK_ON</code>, <code>C_BLINK_OFF</code></p>
+
+### <a id ="cursorshowhide"></a>`digiformatter`.**SHOW\_CURSOR**, .**HIDE\_CURSOR**
+Prints VT-100 codes that show and hide the cursor position, respectively.
+Equates to `digiformatter.ESC` + `[?25h` and `[?25l` respectively.
+<p class="alias">Aliases: <code>C_SHOW</code>, <code>C_HIDE</code></p>
+
+### <a id ="viewportscrolls"></a>`digiformatter`.**SCROLL\_UP**, .**SCROLL\_DOWN**
+Prints VT-100 codes that scroll the viewport up or down, respectively.
+Equates to `digiformatter.ESC` + `[1S` and `[1T` respectively.
+
+### <a id ="insanddel"></a>`digiformatter`.**INSERT\_BLANK**, .**DELETE\_CHAR**, **ERASE\_CHAR**, .**INSERT\_LINE**, .**DELETE\_LINE**
 Prints VT-100 codes that insert and delete characters and lines, as per their names.
-Equates to `digiformatter.ESC` + `[1@`, `[1X`, `[1L`, and `[1M` respectively.
+Equates to `digiformatter.ESC` + `[1@`, `[1P`, `[1X`, `[1L`, and `[1M` respectively.
+<p class="alias">Aliases: <code>INS_BLANK</code>, <code>DEL_CHAR</code>, <code>ERS_CHAR</code>, <code>INS_LINE</code>, <code>DEL_CHAR</code></p>
+
+### <a id ="cursorclearline"></a>`digiformatter`.**CLEAR\_LINE\_FROM\_CURSOR\_RIGHT**, .**CLEAR\_LINE\_FROM\_CURSOR\_RIGHT**
+Prints VT-100 codes that clear the line starting at the cursor position and moving either right or left, respectively.
+Equates to `digiformatter.ESC` + `[0K` and `[1K` respectively.
+<p class="alias">Aliases: <code>CLEAR_RIGHT</code>, <code>CLEAR_LEFT</code></p>
+
+### <a id ="cursorclearscreen"></a>`digiformatter`.**CLEAR\_SCREEN\_FROM\_CURSOR\_DOWN**, .**CLEAR\_SCREEN\_FROM\_CURSOR\_UP**
+Prints VT-100 codes that clear the screen starting at the cursor position and moving either down or up, respectively.
+Equates to `digiformatter.ESC` + `[0J` and `[1J` respectively.
+<p class="alias">Aliases: <code>CLEAR_DOWN</code>, <code>CLEAR_UP</code></p>
+
+### <a id ="clearscreen"></a>`digiformatter`.**CLEAR\_SCREEN**
+Prints VT-100 code that clears the screen.
+Equates to `digiformatter.ESC` + `[2J`
+<p class="alias">Aliases: <code>CLEAR</code> or <code>CLS</code></p>
 
 ### <a id ="endandstart"></a>`digiformatter`.**END\_OF\_LINE**, .**BEGIN\_OF\_LINE**
 Prints `digiformatter.CURSOR_RIGHT` or `digiformatter.CURSOR_LEFT` `digiformatter.linelength` times. See [`digiformatter.linelength()`](#linelength).
+<p class="alias">Aliases: <code>EOL</code>, <code>BOL</code></p>
+
+### <a id ="resetterminal"></a>`digiformatter`.**RESET\_TERMINAL**
+Prints VT-100 code that resets the terminal to its initial state.
+Equates to `digiformatter.ESC` + `c`
+<p class="alias">Aliases: <code>RESET</code></p>
+
+## Cursor Movement Functions
+
+### <a id ="cursorUp"></a>`digiformatter`.**cursorUp(** *int* amount **)**
+### <a id ="cursorDown"></a>`digiformatter`.**cursorDown(** *int* amount **)**
+### <a id ="cursorRight"></a>`digiformatter`.**cursorRight(** *int* amount **)**
+### <a id ="cursorLeft"></a>`digiformatter`.**cursorLeft(** *int* amount **)**
+Moves the cursor in the direction indicated `amount` lines (for `cursorUp` and `cursorDown`) or characters (for `cursorLeft` and `cursorRight`).
+
+## Scrolling Functions
+
+### <a id ="scrollUp"></a>`digiformatter`.**scrollUp(** *int* amount **)**
+### <a id ="scrollDown"></a>`digiformatter`.**scrollDown(** *int* amount **)**
+Scrolls the viewport `amount` lines up or down, respectively.
+
+## Window Functions
+
+### <a id ="cursorLeft"></a>`digiformatter`.**setWindowTitle(** *str* string **)**
+Set the window title to `string`.
 
 ## Setter Functions
 

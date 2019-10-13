@@ -43,6 +43,16 @@ h2{
     font-family: 'MS Gothic';
     font-weight: 200;
 }
+p.alias{
+    font-style: italic;
+    color: #AAAAAA;
+
+}
+p.alias > code {
+    font-family: 'MS Gothic';
+    font-weight: 200;
+    background-color: #181818;
+}
 footer {
     font-family: 'MS Gothic';
     font-weight: 200;

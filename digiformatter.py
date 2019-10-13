@@ -11,7 +11,7 @@ os.system("")
 FORE = 0
 BACK = 1
 ATTR = 2
-version = "0.2.0"
+version = "0.3.1"
 
 #Customizables.
 timecolor = 5
@@ -29,26 +29,66 @@ TWENTYFIVE = '\u2591'
 FIFTY = '\u2592'
 SEVENTYFIVE = '\u2593'
 FULL = '\u2588'
-BELL = '\x07'
+BELL = BEL = '\x07'
 
 #VT-100 escape sequences.
 ESC = '\033'
 
-CURSOR_UP = ESC + 'A'
-CURSOR_DOWN = ESC + 'B'
-CURSOR_RIGHT = ESC + 'C'
-CURSOR_LEFT = ESC + 'D'
+CURSOR_UP = C_UP ESC + 'A'
+CURSOR_DOWN = C_DOWN = ESC + 'B'
+CURSOR_RIGHT = C_RIGHT = ESC + 'C'
+CURSOR_LEFT = C_LEFT = ESC + 'D'
+CURSOR_HOME = C_HOME = ESC + 'H'
 
-SAVE_CURSOR = ESC + '7'
-LOAD_CURSOR = ESC + '8'
+SAVE_CURSOR = C_SAVE = ESC + '7'
+LOAD_CURSOR = C_LOAD = ESC + '8'
 
-INSERT_BLANK = ESC + "[1@"
-DELETE_CHAR = ESC + "[1X"
-INSERT_LINE = ESC + "[1L"
-DELETE_LINE = ESC + "[1M"
+START_CURSOR_BLINKING = C_BLINK_ON = ESC + '[?12h'
+STOP_CURSOR_BLINKING = C_BLINK_OFF = ESC + '[?12l'
+SHOW_CURSOR = C_SHOW = ESC + '[?25h'
+HIDE_CURSOR = C_HIDE = ESC + '[?25l'
 
-END_OF_LINE = CURSOR_RIGHT * linelength
-BEGIN_OF_LINE = CURSOR_LEFT * linelength
+SCROLL_UP = ESC + '[1S'
+SCROLL_DOWN = ESC + '[1S'
+
+INSERT_BLANK = INS_BLANK = ESC + "[1@"
+DELETE_CHAR = DEL_CHAR = ESC + "[1P"
+ERASE_CHAR = ERS_CHAR = ESC + "[1X"
+INSERT_LINE = INS_LINE = ESC + "[1L"
+DELETE_LINE = DEL_CHAR = ESC + "[1M"
+
+CLEAR_LINE_FROM_CURSOR_RIGHT = CLEAR_RIGHT = ESC + "[0K"
+CLEAR_LINE_FROM_CURSOR_LEFT = CLEAR_LEFT = ESC + "[1K"
+
+CLEAR_SCREEN_FROM_CURSOR_DOWN = CLEAR_DOWN = ESC + "[0J"
+CLEAR_SCREEN_FROM_CURSOR_UP = CLEAR_UP = ESC + "[1J"
+
+CLEAR_SCREEN = CLEAR = CLS = ESC + "[2J"
+
+END_OF_LINE = EOL = CURSOR_RIGHT * linelength
+BEGIN_OF_LINE = BOL = CURSOR_LEFT * linelength
+
+RESET_TERMINAL = RESET = ESC + 'c'
+
+#Cursor movement functions.
+def cursorUp(amount):
+    print(ESC + f"[{amount}A")
+def cursorDown(amount):
+    print(ESC + f"[{amount}B")
+def cursorRight(amount):
+    print(ESC + f"[{amount}C")
+def cursorLeft(amount):
+    print(ESC + f"[{amount}D")
+
+#Scrolling methods.
+def scrollUp(amount):
+    print(ESC + f'[{amount}S')
+def scrollDown(amount):
+    print(ESC + f'[{amount}T')
+
+#Set window title.
+def setWindowTitle(string):
+    print(ESC + f"2;{string}{BELL}")
 
 #Delete an amount of lines.
 def overwriteLines(lines):
