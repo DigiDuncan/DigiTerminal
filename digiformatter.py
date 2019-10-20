@@ -34,7 +34,7 @@ BELL = BEL = '\x07'
 #VT-100 escape sequences.
 ESC = '\033'
 
-CURSOR_UP = C_UP ESC + 'A'
+CURSOR_UP = C_UP = ESC + 'A'
 CURSOR_DOWN = C_DOWN = ESC + 'B'
 CURSOR_RIGHT = C_RIGHT = ESC + 'C'
 CURSOR_LEFT = C_LEFT = ESC + 'D'
@@ -149,26 +149,26 @@ def custom(name, message, showtime = True):
 
 #Create a progress bar.
 def createLoadBar(current, total, barlength = 50, showpercent = False):
-	progress = ((current/total)*100)
-	bar = ""
-	percentage = progress
-	progress *= (barlength * 4 / 100)
-	progress = int(progress)
-	bars = math.floor(progress/4)
-	bar = FULL * bars
-	shade = progress - (bars*4)
-	if shade == 1: bar += TWENTYFIVE
-	if shade == 2: bar += FIFTY
-	if shade == 3: bar += SEVENTYFIVE
-	printableperc = int((c/t)*10000) / 100
-    returnstring = "bar"
-    if showpercent: returnstring += " " + printableperc + "%"
-	return returnstring
+    progress = ((current/total)*100)
+    bar = ""
+    percentage = progress
+    progress *= (barlength * 4 / 100)
+    progress = int(progress)
+    bars = math.floor(progress/4)
+    bar = FULL * bars
+    shade = progress - (bars*4)
+    if shade == 1: bar += TWENTYFIVE
+    if shade == 2: bar += FIFTY
+    if shade == 3: bar += SEVENTYFIVE
+    printableperc = round(((current/total)*100), 2)
+    returnstring = bar
+    if showpercent: returnstring = f"{returnstring} {printableperc}%"
+    return returnstring
 
 #Truncate a long string for terminal printing.
 def truncate(item, trunclen = 80):
-	if len(item) > trunclen:
-		printitem = "…" + item[-(trunclen - 1):]
-	else:
-		printitem = item
-	return printitem
+    if len(item) > trunclen:
+        printitem = "…" + item[-(trunclen - 1):]
+    else:
+        printitem = item
+    return printitem
