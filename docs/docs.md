@@ -10,7 +10,7 @@ _________________________
 ## How to install
 **Windows:** Open a Command Prompt as Admin and run `pip install git+https://github.com/DigiDuncan/DigiFormatter`.
 
-**Linux:** Probably the same thing as Windows?
+**Linux:** Open a ~~Command Prompt~~ Bash Terminal and run `sudo pip install git+https://github.com/DigiDuncan/DigiFormatter`
 
 **Mac:** &#xAF;&#x5C;&#x5F;&#x28;&#x30C4;&#x29;&#x5F;&#x2F;&#xAF;
 
@@ -40,13 +40,13 @@ _________________________
 
 #### Functions
 - Cursor Movement Functions
-    * [cursorUp()](#cursorup)
-    * [cursorDown()](#cursordown)
-    * [cursorRight()](#cursorright)
-    * [cursorLeft()](#cursorleft)
+    * [cursorUp()](#cursorUp)
+    * [cursorDown()](#cursorDown)
+    * [cursorRight()](#cursorRight)
+    * [cursorLeft()](#cursorLeft)
 - Scrolling Functions
-    * [scrollUp()](#scrollup)
-    * [scrollDown()](#scrolldown)
+    * [scrollUp()](#scrollUp)
+    * [scrollDown()](#scrollDown)
 - Window Functions
     * [setWindowTitle()](#setwindowtitle)
 - Setter Functions
