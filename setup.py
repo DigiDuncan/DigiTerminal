@@ -7,9 +7,11 @@ from digiformatter import version as versionnum
 
 here = os.path.abspath(os.path.dirname(__file__))
 
+
 def read(*parts):
     with codecs.open(os.path.join(here, *parts), "r") as f:
         return f.read()
+
 
 setup(
     name="digiformatter",
