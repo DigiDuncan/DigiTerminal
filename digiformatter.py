@@ -8,11 +8,11 @@ from colored import fg, bg, attr
 os.system("")
 
 # Constants
-version = "0.4.0"
+version = "0.5.0"
 
 # Customizables
 default = fg("cyan_1")
-loglevels = {
+styles = {
     "trace": fg("grey_27"),
     "debug": fg("blue"),
     "info": default,
@@ -110,17 +110,17 @@ def timestamp():
     return timestampCodes + strftime(f"{timestring} | ", t) + attr("reset")
 
 
-# Print a message at the request log level
-def formatLog(level, message, showtime=False):
+# Print a message in the requested style
+def formatStyle(level, message, showtime=False):
     formatted = ""
     if showtime:
         formatted += timestamp()
-    formatted = loglevels.get(level, default) + message + attr("reset")
+    formatted = styles.get(level, default) + message + attr("reset")
     return formatted
 
 
-# Create a custom log level
-def createLogLevel(name, fgval = None, bgval = None, attrval = None):
+# Create a custom style
+def createStyle(name, fgval = None, bgval = None, attrval = None):
     codes = ""
     if fgval is not None:
         codes += fg(fgval)
@@ -128,32 +128,32 @@ def createLogLevel(name, fgval = None, bgval = None, attrval = None):
         codes += bg(bgval)
     if attrval is not None:
         codes += attr(attrval)
-    loglevels[name] = codes
+    styles[name] = codes
 
 
 # Convenience methods
 def trace(message):
-    print(formatLog("trace", message))
+    print(formatStyle("trace", message))
 
 
 def debug(message):
-    print(formatLog("debug", message))
+    print(formatStyle("debug", message))
 
 
 def info(message):
-    print(formatLog("info", message))
+    print(formatStyle("info", message))
 
 
 def warn(message):
-    print(formatLog("warn", message))
+    print(formatStyle("warn", message))
 
 
 def error(message):
-    print(formatLog("error", message))
+    print(formatStyle("error", message))
 
 
 def printLog(message, level="info"):
-    print(formatLog(level, message))
+    print(formatStyle(level, message))
 
 
 # Create a progress bar
@@ -197,6 +197,6 @@ def truncate(s, trunclen = 80, trailing = False):
     return s
 
 
-def printLogLevels():
-    # list all log levels
-    print("log levels: " + (" ".join(formatLog(level, level, False) for level in loglevels.keys())))
+def printstyles():
+    # list all styles
+    print("styles: " + (" ".join(formatStyle(level, level, False) for level in styles.keys())))
