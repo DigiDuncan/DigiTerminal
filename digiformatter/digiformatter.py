@@ -2,7 +2,7 @@ import os
 import math
 from time import strftime, localtime
 
-from colored import fg, bg, attr
+import colored
 
 __all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "scrollDown", "setWindowTitle", "overwriteLines", "formatStyle", "createStyle", "createLoadBar", "truncate", "printStyles"]
 
@@ -10,9 +10,9 @@ __all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "s
 os.system("")
 
 # Customizables
-default = fg("cyan_1")
+default = colored.fg("cyan_1")
 styles = {}
-timestampCodes = fg("magenta")
+timestampCodes = colored.fg("magenta")
 
 linelength = 100
 timestring = "%d %b %H:%M:%S"
@@ -105,7 +105,7 @@ def overwriteLines(lines):
 def timestamp():
     """Color styling for terminal messages"""
     t = localtime()
-    return timestampCodes + strftime(f"{timestring} | ", t) + attr("reset")
+    return timestampCodes + strftime(f"{timestring} | ", t) + colored.attr("reset")
 
 
 def formatStyle(level, message, showtime=False):
@@ -113,19 +113,19 @@ def formatStyle(level, message, showtime=False):
     formatted = ""
     if showtime:
         formatted += timestamp()
-    formatted = styles.get(level, default) + message + attr("reset")
+    formatted = styles.get(level, default) + message + colored.attr("reset")
     return formatted
 
 
-def createStyle(name, fgval = None, bgval = None, attrval = None):
+def createStyle(name, fg = None, bg = None, attr = None):
     """Create a custom style"""
     codes = ""
-    if fgval is not None:
-        codes += fg(fgval)
-    if bgval is not None:
-        codes += bg(bgval)
-    if attrval is not None:
-        codes += attr(attrval)
+    if fg is not None:
+        codes += colored.fg(fg)
+    if bg is not None:
+        codes += colored.bg(bg)
+    if attr is not None:
+        codes += colored.attr(attr)
     styles[name] = codes
 
 
