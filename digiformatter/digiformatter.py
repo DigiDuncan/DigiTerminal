@@ -4,21 +4,14 @@ from time import strftime, localtime
 
 from colored import fg, bg, attr
 
+__all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "scrollDown", "setWindowTitle", "overwriteLines", "formatStyle", "createStyle", "createLoadBar", "truncate", "printStyles"]
+
 # Activate VT-100 terminal formatting
 os.system("")
 
-# Constants
-version = "0.5.0"
-
 # Customizables
 default = fg("cyan_1")
-styles = {
-    "trace": fg("grey_27"),
-    "debug": fg("blue"),
-    "info": default,
-    "warn": fg("yellow"),
-    "error": fg("red") + attr("bold")
-}
+styles = {}
 timestampCodes = fg("magenta")
 
 linelength = 100
@@ -70,48 +63,53 @@ RESET_TERMINAL = RESET = ESC + "c"
 
 # Cursor movement functions
 def cursorUp(amount):
+    """Move the screen cursor to the up"""
     print(ESC + f"[{amount}A")
 
 
 def cursorDown(amount):
+    """Move the screen cursor to the down"""
     print(ESC + f"[{amount}B")
 
 
 def cursorRight(amount):
+    """Move the screen cursor to the right"""
     print(ESC + f"[{amount}C")
 
 
 def cursorLeft(amount):
+    """Move the screen cursor to the left"""
     print(ESC + f"[{amount}D")
 
 
-# Scrolling methods
 def scrollUp(amount):
+    """Scroll up"""
     print(ESC + f"[{amount}S")
 
 
 def scrollDown(amount):
+    """Scroll down"""
     print(ESC + f"[{amount}T")
 
 
-# Set window title
 def setWindowTitle(s):
+    """Set window title"""
     print(ESC + f"2;{s}{BELL}")
 
 
-# Delete an amount of lines
 def overwriteLines(lines):
+    """Delete an amount of lines"""
     print(BEGIN_OF_LINE + ((CURSOR_UP + DELETE_LINE) * lines))
 
 
-# Color styling for terminal messages
 def timestamp():
+    """Color styling for terminal messages"""
     t = localtime()
     return timestampCodes + strftime(f"{timestring} | ", t) + attr("reset")
 
 
-# Print a message in the requested style
 def formatStyle(level, message, showtime=False):
+    """Format a message in the requested style"""
     formatted = ""
     if showtime:
         formatted += timestamp()
@@ -119,8 +117,8 @@ def formatStyle(level, message, showtime=False):
     return formatted
 
 
-# Create a custom style
 def createStyle(name, fgval = None, bgval = None, attrval = None):
+    """Create a custom style"""
     codes = ""
     if fgval is not None:
         codes += fg(fgval)
@@ -131,33 +129,8 @@ def createStyle(name, fgval = None, bgval = None, attrval = None):
     styles[name] = codes
 
 
-# Convenience methods
-def trace(message):
-    print(formatStyle("trace", message))
-
-
-def debug(message):
-    print(formatStyle("debug", message))
-
-
-def info(message):
-    print(formatStyle("info", message))
-
-
-def warn(message):
-    print(formatStyle("warn", message))
-
-
-def error(message):
-    print(formatStyle("error", message))
-
-
-def printLog(message, level="info"):
-    print(formatStyle(level, message))
-
-
-# Create a progress bar
 def createLoadBar(current, total, barlength = 50, showpercent = False):
+    """Create a progress bar"""
     TWENTYFIVE = "\u2591"
     FIFTY = "\u2592"
     SEVENTYFIVE = "\u2593"
@@ -187,8 +160,8 @@ def createLoadBar(current, total, barlength = 50, showpercent = False):
     return barstring
 
 
-# Truncate a long string for terminal printing
 def truncate(s, trunclen = 80, trailing = False):
+    """Truncate a long string for terminal printing"""
     if len(s) > trunclen:
         if trailing:
             s = "…" + s[-(trunclen - 1):]
@@ -197,6 +170,6 @@ def truncate(s, trunclen = 80, trailing = False):
     return s
 
 
-def printstyles():
-    # list all styles
+def printStyles():
+    """list all styles"""
     print("styles: " + (" ".join(formatStyle(level, level, False) for level in styles.keys())))
