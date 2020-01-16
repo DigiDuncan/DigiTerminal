@@ -1,21 +1,12 @@
 import os
 import math
-from time import strftime, localtime
 
-import colored
-
-__all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "scrollDown", "setWindowTitle", "overwriteLines", "formatStyle", "createStyle", "createLoadBar", "truncate", "printStyles"]
+__all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "scrollDown", "setWindowTitle", "overwriteLines", "createLoadBar", "truncate"]
 
 # Activate VT-100 terminal formatting
 os.system("")
 
-# Customizables
-default = colored.fg("cyan_1")
-styles = {}
-timestampCodes = colored.fg("magenta")
-
 linelength = 100
-timestring = "%d %b %H:%M:%S"
 
 # ASCII/ANSI characters
 BLANK = " "
@@ -102,33 +93,6 @@ def overwriteLines(lines):
     print(BEGIN_OF_LINE + ((CURSOR_UP + DELETE_LINE) * lines))
 
 
-def timestamp():
-    """Color styling for terminal messages"""
-    t = localtime()
-    return timestampCodes + strftime(f"{timestring} | ", t) + colored.attr("reset")
-
-
-def formatStyle(level, message, showtime=False):
-    """Format a message in the requested style"""
-    formatted = ""
-    if showtime:
-        formatted += timestamp()
-    formatted = styles.get(level, default) + message + colored.attr("reset")
-    return formatted
-
-
-def createStyle(name, fg = None, bg = None, attr = None):
-    """Create a custom style"""
-    codes = ""
-    if fg is not None:
-        codes += colored.fg(fg)
-    if bg is not None:
-        codes += colored.bg(bg)
-    if attr is not None:
-        codes += colored.attr(attr)
-    styles[name] = codes
-
-
 def createLoadBar(current, total, barlength = 50, showpercent = False):
     """Create a progress bar"""
     TWENTYFIVE = "\u2591"
@@ -168,8 +132,3 @@ def truncate(s, trunclen = 80, trailing = False):
         else:
             s = s[(trunclen - 1):] + "…"
     return s
-
-
-def printStyles():
-    """list all styles"""
-    print("styles: " + (" ".join(formatStyle(level, level, False) for level in styles.keys())))

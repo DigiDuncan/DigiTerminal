@@ -1,12 +1,12 @@
-from digiformatter import createStyle, formatStyle
+from digiformatter import styles
 
 __all__ = ["trace", "debug", "info", "warn", "error", "log"]
 
-createStyle("trace", fg="grey_27")
-createStyle("debug", fg="blue")
-createStyle("info", fg="cyan_1")
-createStyle("warn", fg="yellow")
-createStyle("error", fg="red", attr="bold")
+styles.create("trace", fg="grey_27")
+styles.create("debug", fg="blue")
+styles.create("info", fg="cyan_1")
+styles.create("warn", fg="yellow")
+styles.create("error", fg="red", attr="bold")
 
 
 def trace(message):
@@ -30,4 +30,4 @@ def error(message):
 
 
 def log(message, level="info"):
-    print(formatStyle(level, message))
+    print(styles.print(message, style=level))
