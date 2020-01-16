@@ -41,11 +41,11 @@ class Styles:
     def _timestamp(self):
         """Color styling for terminal messages"""
         t = localtime()
-        return self.timestampCodes + strftime(f"{self._timestring} | ", t) + colored.attr("reset")
+        return self.timestampCodes + strftime(f"{self.timestring} | ", t) + colored.attr("reset")
 
     def __getattr__(self, name):
         if name not in self._styles:
-            raise AttributeError
+            raise AttributeError(f"{self.__class__.__name__!r} object has no attribute {name!r}")
         return lambda message: self.print(message, style=name)
 
     def __str__(self):
