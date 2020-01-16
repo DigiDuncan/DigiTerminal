@@ -9,25 +9,25 @@ styles.create("warn", fg="yellow")
 styles.create("error", fg="red", attr="bold")
 
 
-def trace(message):
-    log(message, level="trace")
+def trace(message, **kwargs):
+    log(message, level="trace", **kwargs)
 
 
-def debug(message):
-    log(message, level="debug")
+def debug(message, **kwargs):
+    log(message, level="debug", **kwargs)
 
 
-def info(message):
-    log(message, level="info")
+def info(message, **kwargs):
+    log(message, level="info", **kwargs)
 
 
-def warn(message):
-    log(message, level="warn")
+def warn(message, **kwargs):
+    log(message, level="warn", **kwargs)
 
 
-def error(message):
-    log(message, level="error")
+def error(message, **kwargs):
+    log(message, level="error", **kwargs)
 
 
-def log(message, level="info"):
-    print(styles.print(message, style=level))
+def log(message, level="info", showtime=True):
+    styles.print(message, style=level, showtime=showtime)

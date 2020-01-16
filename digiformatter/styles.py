@@ -10,7 +10,6 @@ class Styles:
 
     def __init__(self):
         self._styles = {}
-        self.default = colored.fg("cyan_1")
         self.timestring = "%d %b %H:%M:%S"
         self.timestampCodes = colored.fg("magenta")
 
@@ -27,10 +26,12 @@ class Styles:
 
     def format(self, message, *, style="default", showtime=False):
         """Format a message in the requested style"""
+        if style not in self._styles:
+            raise ValueError(f"Unknown style: {style}")
         formatted = ""
         if showtime:
             formatted += self._timestamp()
-        formatted = self._styles.get(style, self.default) + message + colored.attr("reset")
+        formatted = self._styles.get(style, "") + message + colored.attr("reset")
         return formatted
 
     def print(self, *args, **kwargs):
