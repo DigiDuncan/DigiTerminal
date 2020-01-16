@@ -45,7 +45,7 @@ class Styles:
     def __getattr__(self, name):
         if name not in self._styles:
             raise AttributeError
-        return lambda message: self.print(message, style="name")
+        return lambda message: self.print(message, style=name)
 
     def __str__(self):
         return "styles: " + (" ".join(self.format(level, style=level) for level in self._styles.keys()))
