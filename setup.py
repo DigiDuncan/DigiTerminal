@@ -11,7 +11,7 @@ def getRequirements():
 
 
 def getLongDescription():
-    with open("README.md", "r") as fh:
+    with open("README.md", "r", encoding="utf-8") as fh:
         longDescription = fh.read()
     return longDescription
 
