@@ -5,3 +5,4 @@ docs/docs.zip
 build
 dist
 *.code-workspace
+_build
