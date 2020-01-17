@@ -4,3 +4,4 @@ docs/docs.zip
 .vscode
 build
 dist
+*.code-workspace
