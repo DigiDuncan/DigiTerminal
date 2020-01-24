@@ -1,16 +1,16 @@
+import logging
+
 from digiformatter import styles
 
-__all__ = ["trace", "debug", "info", "warn", "error", "log"]
+__all__ = ["debug", "info", "warn", "error", "critical", "log"]
 
-styles.create("trace", fg="grey_27")
-styles.create("debug", fg="blue")
-styles.create("info", fg="cyan_1")
-styles.create("warn", fg="yellow")
-styles.create("error", fg="red", attr="bold")
-
-
-def trace(message, **kwargs):
-    log(message, level="trace", **kwargs)
+styles.create("debug", fg="blue")                               # DEBUG
+styles.create("info")                                           # INFO
+styles.create("warning", fg="yellow")                           # WARNING
+styles.create("warn", fg="yellow")                              # WARN
+styles.create("error", fg="red", attr="bold")                   # ERROR
+styles.create("critical", fg="yellow", bg="red", attr="bold")   # CRITICAL
+styles.create("critical", fg="yellow", bg="red", attr="bold")   # FAIL
 
 
 def debug(message, **kwargs):
@@ -22,12 +22,37 @@ def info(message, **kwargs):
 
 
 def warn(message, **kwargs):
-    log(message, level="warn", **kwargs)
+    log(message, level="warning", **kwargs)
 
 
 def error(message, **kwargs):
     log(message, level="error", **kwargs)
 
 
+def critical(message, **kwargs):
+    log(message, level="critical", **kwargs)
+
+
 def log(message, level="info", showtime=True):
     styles.print(message, style=level, showtime=showtime)
+
+
+class DigiFormatterHandler(logging.Handler):
+    def emit(self, record):
+        message = record.getMessage()
+        log(message, level=record.levelname.lower())
+
+
+# Get the next unassigned log level, higher than the base level specified (default to 20: INFO)
+def getFreeLevel(base=None):
+    baselevel = logging._nameToLevel.get(base, 20)
+    level = baselevel
+    while level in logging._levelToName:
+        level += 1
+    return level
+
+
+def addLogLevel(name, *args, base=None, **kwargs):
+    styles.create(name, *args, **kwargs)
+    freelevel = getFreeLevel(base)
+    logging.addLogLevel(name, freelevel)
