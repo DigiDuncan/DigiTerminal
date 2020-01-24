@@ -10,7 +10,7 @@ styles.create("warning", fg="yellow")                           # WARNING
 styles.create("warn", fg="yellow")                              # WARN
 styles.create("error", fg="red", attr="bold")                   # ERROR
 styles.create("critical", fg="yellow", bg="red", attr="bold")   # CRITICAL
-styles.create("critical", fg="yellow", bg="red", attr="bold")   # FAIL
+styles.create("fatal", fg="yellow", bg="red", attr="bold")      # FATAL
 
 
 def debug(message, **kwargs):
