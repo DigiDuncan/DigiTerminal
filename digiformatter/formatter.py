@@ -7,6 +7,7 @@ __all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "s
 os.system("")
 
 linelength = 100
+windowheight = 40
 
 # ASCII/ANSI characters
 BLANK = " "
@@ -71,6 +72,14 @@ def cursorRight(amount):
 def cursorLeft(amount):
     """Move the screen cursor to the left"""
     print(ESC + f"[{amount}D")
+
+
+def goto(x, y):
+    "Go to an X,Y coordinate in the window"
+    print(BEGIN_OF_LINE)
+    cursorUp(windowheight)
+    cursorRight(x)
+    cursorDown(y)
 
 
 def scrollUp(amount):
