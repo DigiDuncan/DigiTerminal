@@ -15,6 +15,7 @@ class Styles:
 
     def create(self, name, *, fg = None, bg = None, attr = None):
         """Create a custom style"""
+        name = name.lower()
         codes = ""
         if fg is not None:
             codes += colored.fg(fg)
@@ -26,6 +27,7 @@ class Styles:
 
     def format(self, message, *, style="default", showtime=False):
         """Format a message in the requested style"""
+        style = style.lower()
         if style not in self._styles:
             raise ValueError(f"Unknown style: {style}")
         formatted = ""
@@ -44,6 +46,7 @@ class Styles:
         return self.timestampCodes + strftime(f"{self.timestring} | ", t) + colored.attr("reset")
 
     def __getattr__(self, name):
+        name = name.lower()
         if name not in self._styles:
             raise AttributeError(f"{self.__class__.__name__!r} object has no attribute {name!r}")
         return lambda message: self.print(message, style=name)
