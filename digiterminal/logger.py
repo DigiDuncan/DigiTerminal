@@ -14,27 +14,27 @@ styles.create("fatal", fg="yellow", bg="red", attr="bold")      # FATAL
 
 
 def debug(message, **kwargs):
-    log(message, level="debug", **kwargs)
+    log(message, level="debug", prefix = "DBG", **kwargs)
 
 
 def info(message, **kwargs):
-    log(message, level="info", **kwargs)
+    log(message, level="info", prefix = "INF" **kwargs)
 
 
 def warn(message, **kwargs):
-    log(message, level="warning", **kwargs)
+    log(message, level="warning", prefix = "WRN", **kwargs)
 
 
 def error(message, **kwargs):
-    log(message, level="error", **kwargs)
+    log(message, level="error", prefix = "ERR" **kwargs)
 
 
 def critical(message, **kwargs):
-    log(message, level="critical", **kwargs)
+    log(message, level="critical", prefix = "CRT", **kwargs)
 
 
-def log(message, level="info", showtime=True):
-    styles.print(message, style=level, showtime=showtime)
+def log(message, level="info", showtime = True, prefix = None):
+    styles.print(message, style = level, showtime = showtime, prefix = prefix)
 
 
 class DigiTerminalHandler(logging.Handler):

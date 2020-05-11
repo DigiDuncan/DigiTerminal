@@ -25,12 +25,14 @@ class Styles:
             codes += colored.attr(attr)
         self._styles[name] = codes
 
-    def format(self, message, *, style="default", showtime=False):
+    def format(self, message, *, style = "default", showtime = False, prefix = None):
         """Format a message in the requested style"""
         style = style.lower()
         if style not in self._styles:
             raise ValueError(f"Unknown style: {style}")
         formatted = ""
+        if prefix:
+            formatted += self._styles.get(style, "") + colored.attr("reverse") + prefix + " " + colored.attr("reset")
         if showtime:
             formatted += self._timestamp()
         formatted = self._styles.get(style, "") + message + colored.attr("reset")
