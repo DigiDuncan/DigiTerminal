@@ -4,4 +4,9 @@ docs/docs.zip
 .vscode
 build
 dist
+<<<<<<< HEAD
 *.pyc
+=======
+*.code-workspace
+_build
+>>>>>>> master
