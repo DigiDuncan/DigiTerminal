@@ -6,8 +6,7 @@ __all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "s
 # Activate VT-100 terminal formatting
 os.system("")
 
-linelength = 100
-windowheight = 40
+linelength = 132
 
 # ASCII/ANSI characters
 BLANK = " "
@@ -20,6 +19,7 @@ CURSOR_UP = C_UP = ESC + "A"
 CURSOR_DOWN = C_DOWN = ESC + "B"
 CURSOR_RIGHT = C_RIGHT = ESC + "C"
 CURSOR_LEFT = C_LEFT = ESC + "D"
+CURSOR_NEXT_LINE = C_NEXT_LINE = NEXT_LINE = ESC + "E"
 CURSOR_HOME = C_HOME = ESC + "H"
 
 SAVE_CURSOR = C_SAVE = ESC + "7"
@@ -30,14 +30,14 @@ STOP_CURSOR_BLINKING = C_BLINK_OFF = ESC + "[?12l"
 SHOW_CURSOR = C_SHOW = ESC + "[?25h"
 HIDE_CURSOR = C_HIDE = ESC + "[?25l"
 
-SCROLL_UP = ESC + "[1S"
-SCROLL_DOWN = ESC + "[1S"
+SCROLL_UP = ESC + "[1M"
+SCROLL_DOWN = ESC + "[1D"
 
 INSERT_BLANK = INS_BLANK = ESC + "[1@"
 DELETE_CHAR = DEL_CHAR = ESC + "[1P"
 ERASE_CHAR = ERS_CHAR = ESC + "[1X"
 INSERT_LINE = INS_LINE = ESC + "[1L"
-DELETE_LINE = DEL_CHAR = ESC + "[1M"
+DELETE_LINE = DEL_LINE = ESC + "[2K"
 
 CLEAR_LINE_FROM_CURSOR_RIGHT = CLEAR_RIGHT = ESC + "[0K"
 CLEAR_LINE_FROM_CURSOR_LEFT = CLEAR_LEFT = ESC + "[1K"
@@ -76,10 +76,7 @@ def cursorLeft(amount):
 
 def goto(x, y):
     "Go to an X,Y coordinate in the window"
-    print(BEGIN_OF_LINE)
-    cursorUp(windowheight)
-    cursorRight(x)
-    cursorDown(y)
+    print(ESC + f"[{x};{y}H")
 
 
 def scrollUp(amount):
@@ -103,9 +100,9 @@ def overwriteLines(lines, hack = False):
         linedel = DELETE_LINE + (" " * linelength)
     else:
         linedel = DELETE_LINE
-    for l in range(lines):
+    for li in range(lines):
         print(BEGIN_OF_LINE + linedel, end = "")
-        if l != lines - 1:
+        if li != lines - 1:
             print(CURSOR_UP)
     print(BEGIN_OF_LINE)
 
