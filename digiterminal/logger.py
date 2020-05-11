@@ -18,7 +18,7 @@ def debug(message, **kwargs):
 
 
 def info(message, **kwargs):
-    log(message, level="info", prefix = "INF" **kwargs)
+    log(message, level="info", prefix = "INF", **kwargs)
 
 
 def warn(message, **kwargs):
@@ -26,7 +26,7 @@ def warn(message, **kwargs):
 
 
 def error(message, **kwargs):
-    log(message, level="error", prefix = "ERR" **kwargs)
+    log(message, level="error", prefix = "ERR", **kwargs)
 
 
 def critical(message, **kwargs):
