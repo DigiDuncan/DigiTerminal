@@ -32,7 +32,7 @@ class Styles:
             raise ValueError(f"Unknown style: {style}")
         formatted = ""
         if prefix:
-            formatted += self._styles.get(style, "") + colored.attr("reverse") + prefix + " " + colored.attr("reset")
+            formatted += self._prefix(prefix, style)
         if showtime:
             formatted += self._timestamp()
         formatted += self._styles.get(style, "") + message + colored.attr("reset")
@@ -41,6 +41,9 @@ class Styles:
     def print(self, *args, **kwargs):
         """Print a message in the requested style"""
         print(self.format(*args, **kwargs))
+
+    def _prefix(self, prefix, style):
+        return self._styles.get(style, "") + colored.attr("reverse") + prefix + colored.attr("reset") + " "
 
     def _timestamp(self):
         """Color styling for terminal messages"""
