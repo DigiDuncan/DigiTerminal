@@ -185,6 +185,11 @@ def setWindowTitle(s):
     print(ESC + f"2;{s}{BELL}", end = "")
 
 
+def setWindowBounds(top, bottom):
+    """Set the top and bottom line of a window."""
+    print(ESC + f"[{top};{bottom}r", end = "")
+
+
 def overwriteLines(lines, hack = False):
     """Delete an amount of lines"""
     if hack:
