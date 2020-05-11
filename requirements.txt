@@ -1,1 +1,2 @@
 colored==1.4.2
+digicolor==1.0.0

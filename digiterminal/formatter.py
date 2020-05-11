@@ -88,9 +88,17 @@ def setWindowTitle(s):
     print(ESC + f"2;{s}{BELL}")
 
 
-def overwriteLines(lines):
+def overwriteLines(lines, hack = False):
     """Delete an amount of lines"""
-    print(BEGIN_OF_LINE + ((CURSOR_UP + DELETE_LINE) * lines))
+    if hack:
+        linedel = DELETE_LINE + (" " * linelength)
+    else:
+        linedel = DELETE_LINE
+    for l in range(lines):
+        print(BEGIN_OF_LINE + linedel, end = "")
+        if l != lines - 1:
+            print(CURSOR_UP)
+    print(BEGIN_OF_LINE)
 
 
 def createLoadBar(current, total, barlength = 50, showpercent = False):

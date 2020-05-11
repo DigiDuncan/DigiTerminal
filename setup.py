@@ -17,7 +17,7 @@ def getLongDescription():
 
 
 def getVersion():
-    path = Path(__file__).parent.resolve() / "digiformatter" / "__init__.py"
+    path = Path(__file__).parent.resolve() / "digiterminal" / "__init__.py"
     with open(path, "r") as fp:
         version_file = fp.read()
     version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
@@ -28,14 +28,14 @@ def getVersion():
 
 
 setuptools.setup(
-    name="digiformatter",
+    name="digiterminal",
     version=getVersion(),
     author="DigiDuncan",
     author_email="digiduncan@gmail.com",
     description="Make your terminals look spicy.",
     long_description=getLongDescription(),
     long_description_content_type="text/markdown",
-    url="https://github.com/DigiDuncan/DigiFormatter",
+    url="https://github.com/DigiDuncan/DigiTerminal",
     python_requires=">=3",
     install_requires=getRequirements(),
     packages=setuptools.find_packages(),
