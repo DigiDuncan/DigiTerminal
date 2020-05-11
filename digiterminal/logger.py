@@ -1,6 +1,6 @@
 import logging
 
-from digiformatter import styles
+from digiterminal import styles
 
 __all__ = ["debug", "info", "warn", "error", "critical", "log"]
 
@@ -37,7 +37,7 @@ def log(message, level="info", showtime=True):
     styles.print(message, style=level, showtime=showtime)
 
 
-class DigiFormatterHandler(logging.Handler):
+class DigiTerminalHandler(logging.Handler):
     def emit(self, record):
         message = record.getMessage()
         log(message, level=record.levelname.lower())

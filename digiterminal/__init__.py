@@ -1,6 +1,6 @@
-__version__ = "0.5.3"
+__version__ = "0.1.0"
 
 __all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp", "scrollDown", "setWindowTitle", "overwriteLines", "createLoadBar", "truncate", "styles"]
 
-from digiformatter.formatter import cursorUp, cursorDown, cursorRight, cursorLeft, scrollUp, scrollDown, setWindowTitle, overwriteLines, createLoadBar, truncate, goto
-from digiformatter.styles import styles
+from digiterminal.formatter import cursorUp, cursorDown, cursorRight, cursorLeft, scrollUp, scrollDown, setWindowTitle, overwriteLines, createLoadBar, truncate, goto
+from digiterminal.styles import styles
