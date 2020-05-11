@@ -1,10 +1,6 @@
 import os
-import re
-import sys
-import termios
-import tty
 
-__all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "getCursorPosition", "scrollUp",
+__all__ = ["cursorUp", "cursorDown", "cursorRight", "cursorLeft", "scrollUp",
            "scrollDown", "setWindowTitle", "overwriteLines"]
 
 # Activate VT-100 terminal formatting
@@ -98,7 +94,7 @@ CLEAR_SCREEN_FROM_CURSOR_UP = CLEAR_UP = ESC + "[1J"
 CLEAR_SCREEN = CLEAR = CLS = ESC + "[2J"
 
 END_OF_LINE = EOL = CURSOR_RIGHT * linelength
-# BEGIN_OF_LINE = BOL = CURSOR_LEFT * linelength
+BEGIN_OF_LINE = BOL = CURSOR_LEFT * linelength
 
 RESET_TERMINAL = RESET = ESC + "c"
 
@@ -132,42 +128,17 @@ def cursorLeft(amount):
     print(ESC + f"[{amount}D", end = "")
 
 
-# Stolen code: see https://github.com/pboardman/py100/blob/master/py100/py100.py
-def getCursorPosition():
-    """Get cursor position as a tuple (x, y)"""
-
-    buf = ""
-    stdin = sys.stdin.fileno()
-    tattr = termios.tcgetattr(stdin)
-
-    try:
-        tty.setcbreak(stdin, termios.TCSANOW)
-        sys.stdout.write(GET_CURSOR)
-        sys.stdout.flush()
-
-        while True:
-            buf += sys.stdin.read(1)
-            if buf[-1] == 'R':
-                break
-
-    finally:
-        termios.tcsetattr(stdin, termios.TCSANOW, tattr)
-
-    matches = re.match(r"^\x1b\[(\d*);(\d*)R", buf)
-    groups = matches.groups()
-
-    return (int(groups[1]), int(groups[0]))
-
-
 def goto(x, y):
     "Go to an X,Y coordinate in the window"
     print(ESC + f"[{x};{y}H", end = "")
 
 
-def BOL():
-    "Go to the beginning of the line."
-    x, y = getCursorPosition()
-    goto(1, y)
+# Currently disabled because the getCursorPosition code I could
+# find only works on Linux due to a termios dependency.
+# def BOL():
+#     "Go to the beginning of the line."
+#     x, y = getCursorPosition()
+#     goto(1, y)
 
 
 def scrollUp(amount):
@@ -197,8 +168,7 @@ def overwriteLines(lines, hack = False):
     else:
         linedel = DELETE_LINE
     for li in range(lines):
-        BOL()
-        print(linedel, end = "")
+        print(BOL + linedel, end = "")
         if li != lines - 1:
             print(CURSOR_UP, end = "")
-    BOL()
+    print(BOL, end = "")
