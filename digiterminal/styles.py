@@ -35,7 +35,7 @@ class Styles:
             formatted += self._styles.get(style, "") + colored.attr("reverse") + prefix + " " + colored.attr("reset")
         if showtime:
             formatted += self._timestamp()
-        formatted = self._styles.get(style, "") + message + colored.attr("reset")
+        formatted += self._styles.get(style, "") + message + colored.attr("reset")
         return formatted
 
     def print(self, *args, **kwargs):
