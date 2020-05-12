@@ -4,37 +4,37 @@ from digiterminal import styles
 
 __all__ = ["debug", "info", "warn", "error", "critical", "log"]
 
-styles.create("debug", fg="blue")                               # DEBUG
-styles.create("info")                                           # INFO
-styles.create("warning", fg="yellow")                           # WARNING
-styles.create("warn", fg="yellow")                              # WARN
-styles.create("error", fg="red", attr="bold")                   # ERROR
-styles.create("critical", fg="yellow", bg="red", attr="bold")   # CRITICAL
-styles.create("fatal", fg="yellow", bg="red", attr="bold")      # FATAL
+styles.create("debug", prefix="DBG", fg="blue")                               # DEBUG
+styles.create("info", prefix="INF")                                           # INFO
+styles.create("warning", prefix="WRN", fg="yellow")                           # WARNING
+styles.create("warn", prefix="WRN", fg="yellow")                              # WARN - DEPRECATED (use WARNING)
+styles.create("error", prefix="ERR", fg="red", attr="bold")                   # ERROR
+styles.create("critical", prefix="CRI", fg="yellow", bg="red", attr="bold")   # CRITICAL
+styles.create("fatal", prefix="CRI", fg="yellow", bg="red", attr="bold")      # FATAL - DEPRECATED (use CRITICAL)
 
 
 def debug(message, **kwargs):
-    log(message, level="debug", prefix = "DBG", **kwargs)
+    log(message, level="debug", **kwargs)
 
 
 def info(message, **kwargs):
-    log(message, level="info", prefix = "INF", **kwargs)
+    log(message, level="info", **kwargs)
 
 
 def warn(message, **kwargs):
-    log(message, level="warning", prefix = "WRN", **kwargs)
+    log(message, level="warning", **kwargs)
 
 
 def error(message, **kwargs):
-    log(message, level="error", prefix = "ERR", **kwargs)
+    log(message, level="error", **kwargs)
 
 
 def critical(message, **kwargs):
-    log(message, level="critical", prefix = "CRT", **kwargs)
+    log(message, level="critical", **kwargs)
 
 
-def log(message, level="info", showtime = True, prefix = None):
-    styles.print(message, style = level, showtime = showtime, prefix = prefix)
+def log(message, *, level="info", showtime=True, **kwargs):
+    styles.print(message, style=level, showtime=showtime, **kwargs)
 
 
 class DigiTerminalHandler(logging.Handler):
